@@ -3,6 +3,6 @@ package errors
 import "errors"
 
 const (
-	CacheNotFound    = errors.New("Cache item not found")
-	CacheUnavailable = errors.New("Cache is unvailable")
+	CacheNotFound    error = errors.New("Cache item not found")
+	CacheUnavailable error = errors.New("Cache is unvailable")
 )
