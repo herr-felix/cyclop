@@ -1,6 +1,6 @@
 package cyclop
 
-import "testing"
+import "time"
 
 type dummyCache struct{}
 

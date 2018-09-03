@@ -6,6 +6,6 @@ type StorageProvider interface {
 	Retreive(entityID uint64, entityType uint16) ([]byte, error)
 	Delete(entityID uint64) error
 	Link(parentID uint64, childID uint64) error
-	UnLink(parentID uint64, childID uint64) error
+	Unlink(parentID uint64, childID uint64) error
 	ChildrenOf(entityID uint64) ([]uint64, error)
 }

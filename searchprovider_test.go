@@ -1,7 +1,5 @@
 package cyclop
 
-import "testing"
-
 type dummySearch struct{}
 
 func newDummySearch() *dummySearch {
