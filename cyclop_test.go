@@ -57,7 +57,7 @@ func TestSave(t *testing.T) {
 		t.Error(err)
 	}
 
-	e.blob = []byte("FAIL!")
+	e.data = dummyData{shouldFail: true}
 	err = c.Save(e)
 	if err == nil {
 		t.Errorf("Storage should have failled")

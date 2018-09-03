@@ -26,6 +26,7 @@ require (
 	github.com/sirupsen/logrus v1.0.6 // indirect
 	github.com/spf13/cobra v0.0.3 // indirect
 	github.com/spf13/pflag v1.0.2 // indirect
+	github.com/vmihailenco/msgpack v4.0.0+incompatible
 	github.com/zmb3/gogetdoc v0.0.0-20180522031303-10095872a7c5 // indirect
 	golang.org/x/arch v0.0.0-20180516175055-5de9028c2478 // indirect
 	golang.org/x/crypto v0.0.0-20180830192347-182538f80094 // indirect

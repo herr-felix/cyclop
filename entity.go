@@ -4,6 +4,7 @@ package cyclop
 type Entity interface {
 	GetID() uint64
 	GetType() string
-	Serialize() []byte
+	Load(interface{}) error
+	Freeze() (interface{}, error)
 	Inspect(*Inspector)
 }

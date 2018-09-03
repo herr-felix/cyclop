@@ -1,16 +1,22 @@
 package cyclop
 
+import "errors"
+
 type dummyEntity struct {
 	ID       uint64
 	typeName string
-	blob     []byte
+	data     dummyData
+}
+
+type dummyData struct {
+	shouldFail bool
 }
 
 func newDummyEntity(ID uint64, typeName string) *dummyEntity {
 	return &dummyEntity{
 		ID:       ID,
 		typeName: typeName,
-		blob:     []byte{},
+		data:     dummyData{shouldFail: false},
 	}
 }
 
@@ -22,8 +28,20 @@ func (e *dummyEntity) GetType() string {
 	return e.typeName
 }
 
-func (e *dummyEntity) Serialize() []byte {
-	return e.blob
+func (e *dummyEntity) Freeze() (interface{}, error) {
+	if e.data.shouldFail {
+		return nil, errors.New("Failling on puspose")
+	}
+	return e.data, nil
+}
+
+func (e *dummyEntity) Load(obj interface{}) (err error) {
+	data, ok := obj.(dummyData)
+	if !ok {
+		return errors.New("Type could not be infered")
+	}
+	e.data = data
+	return nil
 }
 
 func (e *dummyEntity) Inspect(inspector *Inspector) {

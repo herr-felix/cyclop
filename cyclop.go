@@ -1,6 +1,9 @@
 package cyclop
 
-import "errors"
+import (
+	"errors"
+	"github.com/vmihailenco/msgpack"
+)
 
 // Cyclop controls everything...
 type Cyclop struct {
@@ -62,7 +65,17 @@ func (c *Cyclop) Save(entity Entity) error {
 		return errors.New("Type is not registered")
 	}
 
-	err := c.storage.Store(entity.GetID(), c.getTypeIDByName(entity.GetType()), entity.Serialize())
+	data, err := entity.Freeze()
+	if err != nil {
+		return err
+	}
+
+	buffer, err := msgpack.Marshal(data)
+	if err != nil {
+		return err
+	}
+
+	err = c.storage.Store(entity.GetID(), c.getTypeIDByName(entity.GetType()), buffer)
 
 	if err != nil {
 		return err
@@ -70,3 +83,6 @@ func (c *Cyclop) Save(entity Entity) error {
 
 	return nil
 }
+
+// Get load a entity by ID
+// func (c *Cyclop) Get(ID uint64, entity Entity) error
