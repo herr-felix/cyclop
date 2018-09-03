@@ -4,6 +4,6 @@ package cyclop
 type Entity interface {
 	GetID() uint64
 	GetType() string
-	GetBlob() []byte
+	Serialize() []byte
 	Inspect(*Inspector) []Infraction
 }

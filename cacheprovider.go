@@ -13,12 +13,12 @@ type CacheProvider interface {
 
 	// Get retreive an entity by its ID.
 	// Return nil, CacheErrorNotFound if nothing is found.
-	Get(entityID uint64) (*RawEntity, error)
+	Get(entityID uint64, entityType string) ([]byte, error)
 
 	// Put place an entity in cache with a TTL.
 	// If the TTL is 0, default will be used. If negative, no TTL is set.
 	// If the entity already exists in cache, it will be overwritten.
-	Put(entity *RawEntity, TTL time.Duration) error
+	Put(entityID uint64, entityType uint16, blob []byte, TTL time.Duration) error
 
 	// Delete simply remove an entity from the cache.
 	Delete(entityID uint64) error
